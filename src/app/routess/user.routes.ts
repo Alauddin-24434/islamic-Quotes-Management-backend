@@ -14,7 +14,9 @@ router.patch(
   "/:id/update",
   authenticate,
   authorize("user", "admin"),
+ 
   upload.single("avatar"),
+
   userControllers.updateUserById
 );
 

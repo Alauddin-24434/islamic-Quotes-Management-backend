@@ -19,12 +19,3 @@ export const loginUserSchema = z.object({
   password: z.string().nonempty("Password is required"),
 });
 
-// =======================
-// Update User Validation (only name & avatar allowed)
-// =======================
-export const updateUserSchema = z.object({
-  name: z.string().optional(),
-  avatar: z.string().url().optional(),
-}).refine((data) => data.name || data.avatar, {
-  message: "At least 'name' or 'avatar' must be provided",
-});

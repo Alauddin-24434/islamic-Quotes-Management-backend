@@ -4,6 +4,7 @@ import { catchAsync } from "../utills/catchAsync";
 import { userServices } from "../services/user.services";
 import { envVariable } from "../config";
 import { sendResponse } from "../utills/sendResponse";
+import { AppError } from "../error/appError";
 // ==============================================================================
 // Get all users
 // ==============================================================================
@@ -45,11 +46,17 @@ const getUserById = catchAsync(
 const updateUserById = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const userId= req.params.id;
-    let body;
-
-    if(req.file?.path){
-        body= {...req.body, avatar: req.file.path}
+   const body = { ...req.body };
+   // Throw error if avatar is required but file not provided
+    if (!req.file?.path) {
+      throw new AppError(400, "Avatar file is required");
     }
+
+    // Add avatar to body if file exists
+    if (req.file?.path) {
+      body.avatar = req.file.path;
+    }
+
 
     const { safeUser, accessToken, refreshToken } = await userServices.updateUserByIdIntoDb(userId, body);
 
