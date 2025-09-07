@@ -1,20 +1,7 @@
 import { Schema, model, Document } from "mongoose";
 import bcrypt from "bcrypt";
+import { IUser } from "../interfaces/user.interfcae";
 
-// =============================================================
-// IUser interface
-// =============================================================
-export interface IUser extends Document {
-  name: string;
-  avatar?: string;
-  email: string;
-  password: string;
-  role: "user" | "admin";
-  createdAt?: Date;
-  updatedAt?: Date;
-  
-  comparePassword(candidatePassword: string): Promise<boolean>;
-}
 
 // =============================================================
 // User Schema
@@ -26,7 +13,7 @@ const userSchema = new Schema<IUser>(
       required: [true, "Name is required"], // Custom error message
     },
     avatar: { 
-      type: String, // Optional profile picture URL
+      type: String, required:[true, "Avatar is requird"],
     },
     email: { 
       type: String, 

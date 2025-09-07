@@ -7,7 +7,7 @@ import { Document } from "mongoose";
 // Represents a User document in MongoDB
 export interface IUser extends Document {
   name: string;
-  avatar?: string;       // Optional profile picture URL
+  avatar: string;       // Optional profile picture URL
   email: string;
   password: string;
   role: "user" | "admin";
