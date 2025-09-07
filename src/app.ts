@@ -1,11 +1,12 @@
 import express, { Application, NextFunction, Request, Response } from "express";
 import cors from "cors";
 import { AppError } from "./app/error/appError";
-
+import { mainRoute } from "./app/api";
+import cookieParser from "cookie-parser";
 const app:Application= express();
 
 app.use(express.json());
-
+app.use(cookieParser())
 app.use(cors({
     origin:["http://localhost:3000"],
     credentials:true,
@@ -19,6 +20,8 @@ app.get('/', (req:Request, res:Response)=>{
         message:"Server is running"
     })
 })
+// main route
+mainRoute(app)
 
 
 app.use((req:Request, res:Response, next:NextFunction)=>{
@@ -27,7 +30,6 @@ app.use((req:Request, res:Response, next:NextFunction)=>{
     messgae:"Route not found"
    })
 })
-
 
 app.use((error:AppError, req:Request, res:Response, next:NextFunction)=>{
    

@@ -13,7 +13,8 @@ const userSchema = new Schema<IUser>(
       required: [true, "Name is required"], // Custom error message
     },
     avatar: { 
-      type: String, required:[true, "Avatar is requird"],
+      type: String, 
+         default: null, 
     },
     email: { 
       type: String, 
