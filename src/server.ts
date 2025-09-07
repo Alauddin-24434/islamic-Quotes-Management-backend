@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { envVariable } from "./app/error/config"
+import { envVariable } from "./app/config"
 import app from "./app";
 
 
