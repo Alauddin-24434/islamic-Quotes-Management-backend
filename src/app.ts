@@ -3,6 +3,7 @@ import cors from "cors";
 import { AppError } from "./app/error/appError";
 import { mainRoute } from "./app/api";
 import cookieParser from "cookie-parser";
+import { globalError } from "./app/middlewares/globalError";
 const app:Application= express();
 
 app.use(express.json());
@@ -31,19 +32,6 @@ app.use((req:Request, res:Response, next:NextFunction)=>{
    })
 })
 
-app.use((error:AppError, req:Request, res:Response, next:NextFunction)=>{
-   
-let statusCode;
- statusCode= error.statusCode || 500;
- let message;
- message= error.message || "Spmethin went wrong!"
-
-res.status(statusCode).json({
-    statusCode,
-    message,
-})
-
-})
-
+app.use(globalError)
 
 export default app;

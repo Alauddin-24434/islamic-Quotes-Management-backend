@@ -12,7 +12,7 @@ const createUser = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const body = req.body;
 
-    const { user, accessToken, refreshToken } = await authServices.createUserIntoDb(body);
+    const { safeUser, accessToken, refreshToken } = await authServices.createUserIntoDb(body);
 
     // Set refresh token cookie
     res.cookie("refreshToken", refreshToken, {
@@ -26,7 +26,7 @@ const createUser = catchAsync(
       success: true,
       statusCode: 201,
       message: "User created successfully",
-      data: { user, accessToken },
+      data: { safeUser, accessToken },
     });
   }
 );
@@ -38,7 +38,7 @@ const loginUser = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const body = req.body;
 
-    const { user, accessToken, refreshToken } = await authServices.loginUserIntoDb(body);
+    const { safeUser, accessToken, refreshToken } = await authServices.loginUserIntoDb(body);
 
     // Set refresh token cookie
     res.cookie("refreshToken", refreshToken, {
@@ -52,7 +52,7 @@ const loginUser = catchAsync(
       success: true,
       statusCode: 200,
       message: "Login successful",
-      data: { user, accessToken },
+      data: { safeUser, accessToken },
     });
   }
 );
