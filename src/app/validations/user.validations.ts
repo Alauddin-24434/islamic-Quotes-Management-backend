@@ -3,7 +3,7 @@ import { z } from "zod";
 // =======================
 // Create User Validation
 // =======================
-export const createUserSchema = z.object({
+export const createUserValidayionSchema = z.object({
   name: z.string().nonempty("Name is required"),
   email: z.string().email("Invalid email format"),
   password: z.string().min(6, "Password must be at least 6 characters"),
@@ -14,7 +14,7 @@ export const createUserSchema = z.object({
 // =======================
 // Login User Validation
 // =======================
-export const loginUserSchema = z.object({
+export const loginUserValidationSchema = z.object({
   email: z.string().email("Invalid email format"),
   password: z.string().nonempty("Password is required"),
 });

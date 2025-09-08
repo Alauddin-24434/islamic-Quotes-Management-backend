@@ -1,7 +1,8 @@
-import { Application } from "express";
+import { Application, Router } from "express";
 
 import { authRoutes } from "../routess/auth.routes";
 import { userRoutes } from "../routess/user.routes";
+import { quoteRoutes } from "../routess/quote.routes";
 
 const allApiRoutes =[
     {
@@ -11,6 +12,10 @@ const allApiRoutes =[
     {
         path:"/api/users",
         route: userRoutes
+    },
+    {
+        path:"/api/quotes",
+        route: quoteRoutes
     }
 ]
 
