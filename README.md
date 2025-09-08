@@ -57,8 +57,4 @@ It provides APIs to serve Islamic quotes to the frontend.
    npm run dev
    ```
 
----
-
-✍️ **Note for Recruiters:**
-The backend is **not fully complete yet**. At this stage, we are setting up the API structure. Database integration and full functionality will be added as development continues.
 
