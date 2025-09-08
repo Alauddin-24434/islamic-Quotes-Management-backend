@@ -10,6 +10,7 @@ export interface IQuote{
     author: string;
     createdBy:mongoose.Types.ObjectId;
     approved: boolean;
+    isDeleted: false;
     createdAt: Date;
     updatedAt: Date;
     

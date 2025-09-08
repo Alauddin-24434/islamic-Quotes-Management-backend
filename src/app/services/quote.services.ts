@@ -13,7 +13,7 @@ const createQuoteIntoDb = async (payload: IQuote) => {
 // Get All Quotes (For Everyone, only approved)
 // ==============================================
 const getAllQuotesIntoDb = async () => {
-  const quotes = await Quote.find({ approved: true }).populate("createdBy", "name");
+  const quotes = await Quote.find({ approved: true, isDeleted: false }).populate("createdBy", "name");
   return quotes;
 };
 
@@ -21,7 +21,7 @@ const getAllQuotesIntoDb = async () => {
 // Get All Unapproved Quotes (Admin only)
 // ==============================================
 const getUnapprovedQuotesFromDb = async () => {
-  const quotes = await Quote.find({ approved: false }).populate("createdBy", "name email");
+  const quotes = await Quote.find({ approved: false , isDeleted:false}).populate("createdBy", "name email");
   return quotes;
 };
 
@@ -41,13 +41,17 @@ const updateQuoteByIdIntoDb = async (
 ) => {
   return Quote.findByIdAndUpdate(id, payload, { new: true });
 };
-
 // ==============================================
-// Delete Quote (Admin only)
+// Soft Delete Quote (User/Admin)
 // ==============================================
 const deleteQuoteByIdFromDb = async (id: string) => {
-  return Quote.findByIdAndDelete(id);
+  return Quote.findByIdAndUpdate(
+    id,
+    { isDeleted: true },
+    { new: true } // return the updated document
+  );
 };
+
 
 // ==============================================
 // Export Quote Services

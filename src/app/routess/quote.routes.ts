@@ -49,12 +49,12 @@ router.patch(
 );
 
 // =======================
-// Delete a quote by ID (admin only)
+// Delete a quote by ID (user only)
 // =======================
 router.delete(
   "/:id",
   authenticate,
-  authorize("admin"),
+  authorize("user"),
   quoteControllers.deleteQuoteById
 );
 
